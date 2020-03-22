@@ -1,0 +1,3 @@
+game_hash_size=10
+host=http://127.0.0.1
+port=5000
