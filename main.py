@@ -1,4 +1,4 @@
-from flask import Flask, escape, request
+from flask import Flask, escape, request, render_template
 from word_dictionaries import WordDictionaries
 from config.config import Config
 from games import Games
@@ -31,3 +31,7 @@ def create_game():
 
 
     raise Exception('Invalid data')
+
+@app.route('/pages/create')
+def create_html():
+    return render_template('create.html')
