@@ -1,0 +1,62 @@
+
+
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+  <script>
+
+
+    var isValid = function() {
+      var urlParams = new URLSearchParams(window.location.search);
+
+      var gameKey = urlParams.get('game_key');
+      var userKey = urlParams.get('user_key');
+
+      if(!urlParams.has('game_key') || !urlParams.has('user_key')) {
+        document.body.innerHTML = "Bad URL";
+        return false;
+      }
+
+      return true;
+    }
+
+    var getGameState = function() {
+      var urlParams = new URLSearchParams(window.location.search);
+
+      var gameKey = urlParams.get('game_key');
+
+      var originURL = window.location.origin;
+
+      fetch(originURL + "/game_state?" + 'game_key=' + gameKey, function(){
+          console.log('yey');
+      })
+    }
+
+    window.onload = function() {
+      if(isValid() == true) {
+        getGameState()
+      }
+    }
+
+
+
+
+
+
+  </script>
+
+</head>
+
+<body>
+
+  <h1>Codenames</h1>
+
+
+
+</body>
+
+
+</html>

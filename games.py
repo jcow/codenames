@@ -41,11 +41,29 @@ class Games:
 
         self.games[game.get_game_key()] = game
 
-        game_state = self.get_game_state_dict(game.get_game_key())
+        game_state = self.get_create_game_state_dict(game.get_game_key())
 
         return game_state
 
     def get_game_state_dict(self, game_key):
+
+        if game_key not in self.games:
+            raise Exception("Gamekey not in games " + game_key)
+
+        game = self.games[game_key]
+
+
+        d = {}
+
+        d['game_key'] = game.get_game_key()
+        d['red_spymaster'] = game.get_red_spymaster().get_name()
+        d['red_players'] = list([x.get_name() for x in game.get_red_players()])
+        d['blue_spymaster'] = game.get_blue_spymaster().get_name()
+        d['blue_players'] = list([x.get_name() for x in game.get_blue_players()])
+
+        return d
+
+    def get_create_game_state_dict(self, game_key):
         if game_key not in self.games:
             raise Exception("Gamekey not in games " + game_key)
 

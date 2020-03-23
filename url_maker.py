@@ -24,10 +24,10 @@ class URLMaker:
         if port is not None and len(port) > 0:
             url += ":" + port
 
-        url += "/game"
+        url += "/pages/game"
 
-        url += "/" + game_key
-        url += "/" + self.get_segments_and_concat()
+        url += "?game_key=" + game_key
+        url += "&user_key=" + self.get_segments_and_concat()
 
         return url
 
