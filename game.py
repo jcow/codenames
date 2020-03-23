@@ -3,7 +3,7 @@ from player import Player
 from color import Color
 from url_maker import URLMaker
 from config.config import Config
-
+from gameboard import Gameboard
 
 class Game:
 
@@ -24,6 +24,8 @@ class Game:
         self.blue_spymaster_url = self.url_maker.get_url(game_key)
         self.red_url = self.url_maker.get_url(game_key)
         self.blue_url = self.url_maker.get_url(game_key)
+
+        self.gameboard = Gameboard()
 
     def get_game_key(self):
         return self.game_key
