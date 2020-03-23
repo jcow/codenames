@@ -1,1 +1,106 @@
-Hi
+
+<html>
+
+
+<head>
+  <title>Create Game</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+  <script>
+
+    function createOutput(jsonData) {
+
+      var output = "<h2>Game Created</h2>";
+      for(k in jsonData){
+        v = jsonData[k]
+        output += "<h3>" + k + "</h3>"
+        output += "<p>" + v + "</p>"
+      }
+      output += "";
+
+      return output
+
+
+    }
+
+    window.onload = function(){
+
+      var createdGameContainer = document.getElementById('created_game');
+
+      var submitButton = document.getElementById('submit_button');
+      submitButton.onclick = function(e) {
+
+        e.preventDefault();
+
+        var formData = new FormData();
+
+        formData.append("red_spymaster", document.getElementById('red_spymaster').value);
+        formData.append("red_players", document.getElementById('red_players').value);
+
+        formData.append("blue_spymaster", document.getElementById('blue_spymaster').value);
+        formData.append("blue_players", document.getElementById('blue_players').value);
+
+        var request = new XMLHttpRequest();
+
+        request.onreadystatechange = function() {
+          if (request.readyState === 4) {
+            var createdGameContainer = document.getElementById('created_game');
+            createdGameContainer.innerHTML = createOutput(JSON.parse(request.response))
+          }
+        }
+
+        request.open("POST", "http://127.0.0.1:5000/create_game");
+        request.send(formData);
+
+
+      }
+    }
+  </script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Create Codenames Game</h1>
+
+  <form id="create_form">
+
+    <div class="form-group">
+      <label for="red_spymaster">Red Spymaster</label>
+      <input class="form-control" id="red_spymaster" name="red_spymaster"/>
+    </div>
+
+    <div class="form-group">
+      <label for="red_players">Red Players <small>(Comma Separated)</small></label>
+      <textarea class="form-control" id="red_players" name="red_players"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="blue_spymaster">Blue Spymaster</label>
+      <input class="form-control" id="blue_spymaster" name="blue_spymaster"/>
+    </div>
+
+    <div class="form-group">
+      <label for="blue_players">Blue Players <small>(Comma Separated)</small></label>
+      <textarea class="form-control" id="blue_players" name="blue_players"></textarea>
+    </div>
+
+    <button id="submit_button" type="submit" class="btn btn-default">Submit</button>
+
+  </form>
+</div>
+
+<div class="container">
+  <div id="created_game"></div>
+</div>
+
+
+
+</body>
+
+
+</html>

@@ -34,7 +34,7 @@ class Games:
             game.add_player(red_person, Color.RED)
 
         for blue_person in blue_players:
-            game.add_player(blue_person, Color.COLOR)
+            game.add_player(blue_person, Color.BLUE)
 
         if game.is_valid_game() is False:
             raise Exception("Invalid game state " + game.__dict__)
@@ -53,13 +53,13 @@ class Games:
 
         d = {}
         d['game_key'] = game.get_game_key()
-        d['red_spymaster'] = game.get_red_spymaster()
+        d['red_spymaster'] = game.get_red_spymaster().get_name()
         d['red_spymaster_url'] = game.get_red_spymaster_url()
-        d['red_players'] = list(game.get_red_players())
+        d['red_players'] = list([x.get_name() for x in game.get_red_players()])
         d['red_players_url'] = game.get_red_url()
-        d['blue_spymaster'] = game.get_blue_spymaster()
+        d['blue_spymaster'] = game.get_blue_spymaster().get_name()
         d['blue_spymaster_url'] = game.get_blue_spymaster_url()
-        d['blue_players'] = list(game.get_blue_players())
+        d['blue_players'] = list([x.get_name() for x in game.get_blue_players()])
         d['blue_players_url'] = game.get_blue_url()
 
         return d
